@@ -54,6 +54,46 @@ Create the child component
 * Open src/components/Child.js
 * Add the following Code:
 
+```
+import React, { Component } from 'react';
+
+class Child extends Component {
+    constructor(props){
+        super(props)
+        //set initial state of name to empty string
+        this.state = { name: ''}
+        // bind the this context for child component functions
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+    //every change/key stroke into the input field will set child component state equal current value of input 
+    handleChange(event) {
+        this.setState({name: event.target.value});
+    }
+    //When form is submitted, prevent default to stop page from refreshing
+    handleSubmit(event) {
+        event.preventDefault();
+    }
+    //Render the form 
+    render() {
+        return (
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Name:
+              <input type="text" value={this.state.name} onChange={this.handleChange} />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
+        );
+      }
+}
+export default Child
+```
+
+
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
