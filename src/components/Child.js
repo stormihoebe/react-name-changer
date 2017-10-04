@@ -9,24 +9,29 @@ class Child extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
+    
     //every change/key stroke into the input field will set child component state equal current value of input 
     handleChange(event) {
         this.setState({name: event.target.value});
     }
+
     //When form is submitted, prevent default to stop page from refreshing, trigger the nameSetter function passed to Child component as props.action
-    handleSubmit(event) {
-        event.preventDefault();
+    handleSubmit() {
         this.props.action(this.state.name)       
     }
+
     //Render the form 
     render() {
         return (
-          <form onSubmit={this.handleSubmit}>
+          <form>
             <label>
               Name:
-              <input type="text" value={this.state.name} onChange={this.handleChange} />
+              <input type="text" 
+                     value={this.state.name} 
+                     onChange={this.handleChange} />
             </label>
-            <input type="submit" value="Submit" />
+            <button value="Submit" 
+                    onClick={this.handleSubmit}/>
           </form>
         );
       }
