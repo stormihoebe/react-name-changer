@@ -7,7 +7,7 @@ class Parent extends React.Component {
         this.nameSetter = this.nameSetter.bind(this)
         //Initial state where
         this.state = {
-            name: "Stormi"
+            name: "Stormi Ann"
         }
     }
     //A function that takes in a name and sets this.state.name = name
