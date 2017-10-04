@@ -20,7 +20,7 @@ Get the files ready to begin coding
 Create a new component 
 * Create a new folder in src folder called components 
 * Create a new file inside of src/components called Parent.js
-* Open src/components/Parent
+* Open src/components/Parent.js
 * Add the following Code: 
 ```sh 
 import React, { Component } from 'react';
@@ -49,7 +49,10 @@ class Parent extends React.Component {
 }
 export default Parent
 ```
-
+Create the child component 
+* Create a new file inside of src/components called Child.js
+* Open src/components/Child.js
+* Add the following Code:
 
 ## Available Scripts
 

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import Child from './Child'
 
-class Parent extends React.Component {
+class Parent extends Component {
     constructor(props){
         super(props)
         //bind the this context to the nameSetter function
         this.nameSetter = this.nameSetter.bind(this)
         //Initial state where
         this.state = {
-            name: "Stormi Ann"
+            name: "Stormi"
         }
     }
     //A function that takes in a name and sets this.state.name = name
@@ -18,7 +19,7 @@ class Parent extends React.Component {
     render() {
         return <div>
             <h1>{this.state.name}</h1>
-
+            <Child name={this.state.name} action={this.nameSetter}/>
         </div>
     }
 }
