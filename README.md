@@ -17,6 +17,8 @@ Get the files ready to begin coding
 * Delete unnecessary files from src folder (serviceworker, logo, etc)
 * Remove references to deleted files 
 
+## Creating the app
+
 Create a new component 
 * Create a new folder in src folder called components 
 * Create a new file inside of src/components called Parent.js
@@ -90,6 +92,38 @@ class Child extends Component {
 export default Child
 ```
 
+Adding Child component to Parent Component 
+* Import child component at the top of Parent component by adding this code to the top of the page, just below `import React...`: 
+```
+import Child from './Child' //new
+```
+* Update the Parent render method to include child component, passing nameSetter as action props
+```
+    //Render the name stored in the current state, render child component passing it name and action props. 
+    render() {
+        return <div>
+            <h1>{this.state.name}</h1>
+            <Child name={this.state.name} action={this.nameSetter}/>
+        </div>
+    }
+```
+* Save Parent.js
+
+Adding props to Child Component 
+* Change initial state from being an empty string to props.name passed to child component from parent 
+```
+ //set initial state of name pros.name
+        this.state = { name: props.name}
+```
+* Edit handleSubmit function to include props.action function 
+```
+//When form is submitted, prevent default to stop page from refreshing, trigger the nameSetter function passed to Child component as props.action
+handleSubmit(event) {
+    event.preventDefault();
+    this.props.action(this.state.name)       
+}
+
+```
 
 
 
