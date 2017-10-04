@@ -1,5 +1,5 @@
 # React Name Changer Tutorial 
-This simple react tutorial will help you create two components. One container component that manages the state(name) and another component that takes user input and allows the user to change the state of the container. You will learn basic React functionality and how to pass props and change state. 
+This simple react tutorial will help you create two components. One parent component renders both a name and another component, the child component, which takes user input and triggers updates to the state of the parent component. You will learn basic React functionality, how to pass actions as props, and how to change state with a child component. 
 
 ## Getting started
 
@@ -15,7 +15,7 @@ npm start
 Get the files ready to begin coding 
 * Open react-name-changer in Visual Studio Code 
 * Delete unnecessary files from src folder (serviceworker, logo, etc)
-* Remove references to deleted files 
+* Remove references to deleted files (sorry, this isn't very detailed)
 
 ## Creating the app
 
@@ -56,7 +56,7 @@ Create the child component
 * Open src/components/Child.js
 * Add the following Code:
 
-```
+```sh
 import React, { Component } from 'react';
 
 class Child extends Component {
@@ -94,11 +94,11 @@ export default Child
 
 Adding Child component to Parent Component 
 * Import child component at the top of Parent component by adding this code to the top of the page, just below `import React...`: 
-```
+```sh
 import Child from './Child' //new
 ```
 * Update the Parent render method to include child component, passing nameSetter as action props
-```
+```sh
     //Render the name stored in the current state, render child component passing it name and action props. 
     render() {
         return <div>
@@ -111,12 +111,12 @@ import Child from './Child' //new
 
 Adding props to Child Component 
 * Change initial state from being an empty string to props.name passed to child component from parent 
-```
+```sh
  //set initial state of name pros.name
         this.state = { name: props.name}
 ```
 * Edit handleSubmit function to include props.action function 
-```
+```sh
 //When form is submitted, prevent default to stop page from refreshing, trigger the nameSetter function passed to Child component as props.action
 handleSubmit(event) {
     event.preventDefault();
