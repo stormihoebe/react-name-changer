@@ -146,6 +146,21 @@ const setName = (name) =>{
     }
 }
 ```
+Below the setName action creator, Add a name reducer that takes in current state and an action and returns a new state. 
+```sh
+//name reducer. If the action.type is 'SET_NAME', return a new state with updated name. If type is something else, return the old state. 
+const name = (state, action) => {
+    switch (action.type){
+        case 'SET_NAME':
+            return {
+                name: action.name
+            }
+        default:
+            return state
+    }
+}
+```
+
 
 ## Available Scripts
 

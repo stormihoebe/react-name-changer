@@ -11,6 +11,18 @@ const setName = (name) =>{
     }
 }
 
+//name reducer
+const name = (state, action) => {
+    switch (action.type){
+        case 'SET_NAME':
+            return {
+                name: action.name
+            }
+        default:
+            return state
+    }
+}
+
 class Parent extends Component {
     constructor(props){
         super(props)
