@@ -1,6 +1,16 @@
 # React Name Changer Tutorial 
 This simple react tutorial will help you create two components. One parent component renders both a name and another component, the child component, which takes user input and triggers updates to the state of the parent component. You will learn basic React functionality, how to pass actions as props, and how to change state with a child component. 
 
+
+## Running this application 
+* clone repo `git clone https://github.com/stormihoebe/react-name-changer`
+* open repo `cd react-name-changer`
+* install yarn `yarn install`
+* start yarn `yarn start`
+* view in browser [localhost:3000](http://localhost:3000/)
+
+# Recreating this Application 
+
 ## Getting started
 
 Create a new react application by entering the following command into the terminal
@@ -130,27 +140,11 @@ At this point, your app should work. You should be able to enter a name, hit sub
 ## Implementing Redux
 Now that the app is working, let's add Redux to clean up state management. 
 
-Install Redux and React-Redux and import them into your project
+### Install Redux and React-Redux and import them into your project
 * Install Redux `yarn add redux`
 * Install React-Redux  `yarn add react-redux`
-* Import features of redux and react-redux at the top of Parent.js file 
-```sh
-import { createStore} from 'redux'
-import {Provider, connect} from 'react-redux'
-```
 
-Add an action creator for setting the name in the Parent.js file
-```sh
-//setName action creator 
-const setName = (name) =>{
-    return {
-        type: 'SET_NAME',
-        name
-    }
-}
-```
-
-Add A reducer
+### Add A reducer
 
 * create a new folder for the reducers `src/reducers`
 * create a reducer file `src/reducers/name_reducer.js`
@@ -175,7 +169,7 @@ const nameChangerApp = (
 export default nameChangerApp
 ```
 
-Refactor index.js
+### Refactor index.js
 
 * import redux, Parent component, and reducer in src/index.js (Also, remove import for App)
 ```sh
@@ -208,7 +202,7 @@ render();
 store.subscribe(render)
 ``` 
 
-Refactor Parent Component (src/components/Parent.js)
+### Refactor Parent Component (src/components/Parent.js)
 
 * remove state from component, it is no longer needed since data is in redux store
 * remove name setter function because child component will handle changes
@@ -228,7 +222,7 @@ class Parent extends Component {
 export default Parent
 ```
 
-Refactor Child Component (src/components/Child.js)
+### Refactor Child Component (src/components/Child.js)
 
 * Create a SetName action creator
 ```sh 
