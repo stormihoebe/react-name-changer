@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
 import Child from './Child'
+import { createStore, combineReducers} from 'redux'
+import {Provider, connect} from 'react-redux'
+
+//setName action creator 
+const setName = (name) =>{
+    return {
+        type: 'SET_NAME',
+        name
+    }
+}
 
 class Parent extends Component {
     constructor(props){

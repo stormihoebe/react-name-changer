@@ -17,7 +17,7 @@ Get the files ready to begin coding
 * Delete unnecessary files from src folder (serviceworker, logo, etc)
 * Remove references to deleted files (sorry, this isn't very detailed)
 
-## Creating the app
+## Creating the React app
 
 Create a new component 
 * Create a new folder in src folder called components 
@@ -125,8 +125,27 @@ handleSubmit(event) {
 
 ```
 
+## Implementing Redux
 
+Install Redux and React-Redux and import them into your project
+* Install Redux `yarn add redux`
+* Install React-Redux  `yarn add react-redux`
+* Import features of redux and react-redux at the top of Parent.js file 
+```sh
+import { createStore, combineReducers} from 'redux'
+import {Provider, connect} from 'react-redux'
+```
 
+Add an action creator for setting the name in the Parent.js file
+```sh
+//setName action creator 
+const setName = (name) =>{
+    return {
+        type: 'SET_NAME',
+        name
+    }
+}
+```
 
 ## Available Scripts
 
