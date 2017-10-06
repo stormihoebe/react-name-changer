@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 
+//setName action creator takes in a name string and  
+const setName = (name) =>{
+    return {
+        type: 'SET_NAME',
+        name
+    }
+}
+
 class Child extends Component {
     constructor(props){
         super(props)
@@ -15,25 +23,28 @@ class Child extends Component {
         this.setState({name: event.target.value});
     }
 
-    //When form is submitted, prevent default to stop page from refreshing, trigger the nameSetter function passed to Child component as props.action
+    //When form is submitted, dispatch action creator
     handleSubmit() {
-        this.props.action(this.state.name)       
+        this.props.store.dispatch(setName(this.state.name))     
     }
 
     //Render the form 
     render() {
         return (
-          <form>
-            <label>
-              Name:
-              <input type="text" 
-                     value={this.state.name} 
-                     onChange={this.handleChange} />
-            </label>
-            <button value="Submit" 
-                    onClick={this.handleSubmit}/>
-          </form>
+            <div>
+                <label>
+                    Name:
+                <input 
+                    type="text" 
+                    value={this.state.name} 
+                    onChange={this.handleChange} />
+                </label>
+                <button value="Submit" 
+                    onClick={this.handleSubmit}>
+                    Submit
+                </button>
+            </div>
         );
-      }
+    }
 }
 export default Child

@@ -125,14 +125,17 @@ handleSubmit(event) {
 
 ```
 
+At this point, your app should work. You should be able to enter a name, hit submit, and see the name change at the top of the page. 
+
 ## Implementing Redux
+Now that the app is working, let's add Redux to clean up state management. 
 
 Install Redux and React-Redux and import them into your project
 * Install Redux `yarn add redux`
 * Install React-Redux  `yarn add react-redux`
 * Import features of redux and react-redux at the top of Parent.js file 
 ```sh
-import { createStore, combineReducers} from 'redux'
+import { createStore} from 'redux'
 import {Provider, connect} from 'react-redux'
 ```
 
@@ -146,10 +149,20 @@ const setName = (name) =>{
     }
 }
 ```
-Below the setName action creator, Add a name reducer that takes in current state and an action and returns a new state. 
+
+Add A reducer
+
+* create a new folder for the reducers `src/reducers`
+* create a reducer file `src/reducers/name_reducer.js`
+* Add a name reducer that takes in current state and an action and returns a new state to .reducers/name_reducer.js. 
+
 ```sh
-//name reducer. If the action.type is 'SET_NAME', return a new state with updated name. If type is something else, return the old state. 
-const name = (state, action) => {
+//name reducer takes in a state (with initial assignment state.name = "Stormi" and an action and returns a new state)
+const nameChangerApp = (
+    state ={
+        name:"Stormi"
+    }, 
+    action) => {
     switch (action.type){
         case 'SET_NAME':
             return {
@@ -159,8 +172,101 @@ const name = (state, action) => {
             return state
     }
 }
+export default nameChangerApp
 ```
 
+Refactor index.js
+
+* import redux, Parent component, and reducer in src/index.js (Also, remove import for App)
+```sh
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import Parent from './components/Parent'
+import { createStore} from 'redux'
+import nameChangerApp from './reducers/name_reducer'
+```
+
+* create your redux store using createStore(nameChangerApp)
+* refactor render into a new function that renders Parent component with store passed as props
+* call the new render function
+* subscribe
+
+```sh
+//create store using reducer
+const store = createStore(nameChangerApp)
+
+//render Parent component to DOM
+const render = ()=>{
+    ReactDOM.render(
+        <Parent store={store}/>
+        , document.getElementById('root')
+    )
+}
+render();
+//subscribe to listen to changes to store and run render function when changes are made.  
+store.subscribe(render)
+``` 
+
+Refactor Parent Component (src/components/Parent.js)
+
+* remove state from component, it is no longer needed since data is in redux store
+* remove name setter function because child component will handle changes
+* read application state from props as passed into Parent component (state = this.props.store.getState())
+* refactor ender method and pass store to Child component as props
+```sh
+class Parent extends Component {
+    render() {
+        const name = this.props.store.getState().name
+
+        return <div>
+            <h1>{name}</h1>
+            <Child name={name} store={this.props.store}/>
+        </div>
+    }
+}
+export default Parent
+```
+
+Refactor Child Component (src/components/Child.js)
+
+* Create a SetName action creator
+```sh 
+//setName action creator takes in a name string and  
+const setName = (name) =>{
+    return {
+        type: 'SET_NAME',
+        name
+    }
+}
+```
+* refactor handleSubmit function to dispatch reducer rather than nameSetter
+```sh
+    //When form is submitted, dispatch action creator
+    handleSubmit() {
+        this.props.store.dispatch(setName(this.state.name))     
+    }
+```
+* small refactoring to render function 
+```
+render() {
+        return (
+            <div>
+                <label>
+                    Name:
+                <input 
+                    type="text" 
+                    value={this.state.name} 
+                    onChange={this.handleChange} />
+                </label>
+                <button value="Submit" 
+                    onClick={this.handleSubmit}>
+                    Submit
+                </button>
+            </div>
+        );
+    }
+```
 
 ## Available Scripts
 
